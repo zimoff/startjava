@@ -10,9 +10,17 @@ class Book {
         this.pageNum = pageNum;
     }
 
-    String getAuthor() { return author;}
-    String getName() { return name;}
-    int getPage() { return pageNum;}
+    String getAuthor() { 
+        return author;
+    }
+
+    String getName() {
+        return name;
+    }
+
+    int getPageNum() { 
+        return pageNum;
+    }
 
     String getDescription() { 
         return ("Author: " + author +

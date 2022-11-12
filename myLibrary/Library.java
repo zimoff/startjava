@@ -2,6 +2,48 @@ package myLibrary;
 import java.util.Scanner;
 import java.util.ArrayList;
 class Library {
+    private ArrayList<Book> Books = new ArrayList<>();
+
+    void addBook(Book obj) {
+        Books.add(obj);
+    }
+
+    void deliteBook(int i) {
+        Books.remove(i);
+    }
+
+    void showBooks() {
+        for(Book bk: Books) {
+            System.out.println("|" + Books.indexOf(bk) + "| " + bk.getName());
+        }
+    }
+
+    void findAuthor(String name) {
+        int count = 0;
+        for(Book bk: Books) {
+            if(name.equals(bk.getAuthor()))
+                count++;
+        }
+        System.out.println("found: " + count + " books\n");
+        for(Book bk: Books) {
+            if(name.equals(bk.getAuthor())) {
+                System.out.println(bk.getDescription());
+                System.out.println("-------------");
+            }
+        }
+    }
+
+    void findName(String name) {
+        for(Book bk: Books) {
+            if(bk.getName().contains(name)) {
+                System.out.println(bk.getDescription());
+                System.out.println("-------------");
+            }
+        }
+    }
+
+
+
     public static void main(String[] args) {
 
         //Demo books
@@ -25,55 +67,42 @@ class Library {
         String author5 = "Edgar Rice Burroughs";
         int pageNum5 = 227;
 
+        Library lib = new Library();
+
         //adding books
-        ArrayList<Book> Books = new ArrayList<>();
-        Books.add(new Book(author1, name1 ,pageNum1));
-        Books.add(new Book(author2, name2 ,pageNum2));
-        Books.add(new Book(author3, name3 ,pageNum3));
-        Books.add(new Book(author4, name4 ,pageNum4));
-        Books.add(new Book(author5, name5 ,pageNum5));
+        lib.addBook(new Book(author1, name1 ,pageNum1));
+        lib.addBook(new Book(author2, name2 ,pageNum2));
+        lib.addBook(new Book(author3, name3 ,pageNum3));
+        lib.addBook(new Book(author4, name4 ,pageNum4));
+        lib.addBook(new Book(author5, name5 ,pageNum5));
+
         System.out.println("List of added books: \n");
-        for(Book bk: Books) {
-            System.out.println("|" + Books.indexOf(bk) + "| " + bk.getName());
-        }
+        lib.showBooks();
+        
         System.out.println(">>>>>>>>>>>>>>>>>>>>");
 
-        //finding by author
-        System.out.println("finding book by author: ");
-        int count = 0;
-        for(Book bk: Books) {
-            if("Herbert George Wells".equals(bk.getAuthor()))
-                count++;
-        }
-        System.out.println("found: " + count + " books\n");
-        for(Book bk: Books) {
-            if("Herbert George Wells".equals(bk.getAuthor())) {
-                System.out.println(bk.getDescription());
-                System.out.println("-------------");
-            }
-        }
+        //finding by author Herbert George Wells
+        System.out.println("finding by author:");
+        lib.findAuthor("Herbert George Wells");
 
         System.out.println(">>>>>>>>>>>>>>>>>>>>");
 
         //finding by name 
-        System.out.println("finding book by name: ");
-        System.out.println("Search: The War\n");
-        for(Book bk: Books) {
-            if(bk.getName().contains("The War")) {
-                System.out.println(bk.getDescription());
-                System.out.println("-------------");
-            }
-        }
+        System.out.println("\nfinding by name: ");
+        lib.findName("The War");
+
+        System.out.println(">>>>>>>>>>>>>>>>>>>>");
 
         //deliting books
-        System.out.println(">>>>>>>>>>>>>>>>>>>>");
-        System.out.println("Deliting books\n");
-        Books.remove(0);
-        Books.remove(0);
+        System.out.println("\nDeliting books: ");
+        lib.showBooks();
 
-        System.out.println("List of books: \n");
-        for(Book bk: Books) {
-            System.out.println("|" + Books.indexOf(bk) + "| " + bk.getName());
-        }
+        lib.deliteBook(0);
+        lib.deliteBook(0);
+
+        System.out.println("=========");
+
+        lib.showBooks();
+
     }
 }
