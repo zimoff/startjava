@@ -1,108 +1,93 @@
 package my.library;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.List;
 class Library {
     private ArrayList<Book> Books = new ArrayList<>();
 
-    void addBook(Book obj) {
-        Books.add(obj);
+    //obj
+    void addBook(Book bookObj) {
+        Books.add(bookObj);
     }
 
-    void deliteBook(int i) {
-        Books.remove(i);
+    void deleteBook(Book bookObj) {
+        Books.remove(bookObj);
     }
 
-    void showBooks() {
-        for(Book bk: Books) {
-            System.out.println("|" + Books.indexOf(bk) + "| " + bk.getName());
+    ArrayList<Book> getBooks() {
+        return Books;
+    }
+
+    void showBooks(List<Book> listOfBooks) {
+        System.out.println("-----------");
+        for(Book bk1: listOfBooks) {
+            System.out.println(bk1.getDescription());
+            System.out.println("-----------");
         }
     }
 
-    void findAuthor(String name) {
-        int count = 0;
+    List<Book> findBooksByAuthor(String name) {
+
+        List<Book> autorsBooks = new ArrayList<>();
         for(Book bk: Books) {
             if(name.equals(bk.getAuthor()))
-                count++;
+                autorsBooks.add(bk);
         }
-        System.out.println("found: " + count + " books\n");
-        for(Book bk: Books) {
-            if(name.equals(bk.getAuthor())) {
-                System.out.println(bk.getDescription());
-                System.out.println("-------------");
-            }
-        }
+        return autorsBooks;
     }
 
-    void findName(String name) {
+    List<Book> findBooksByName(String name) {
+        List<Book> autorsBooks = new ArrayList<>();
         for(Book bk: Books) {
-            if(bk.getName().contains(name)) {
-                System.out.println(bk.getDescription());
-                System.out.println("-------------");
-            }
+            if(bk.getName().contains(name))
+                autorsBooks.add(bk);
         }
+        return autorsBooks;
     }
-
-
 
     public static void main(String[] args) {
-
-        //Demo books
-        String name1 = "The Time Machine"; 
-        String author1 = "Herbert George Wells";
-        int pageNum1 = 78;
-        
-        String name2 = "The War of the Worlds"; 
-        String author2 = "Herbert George Wells";
-        int pageNum2 = 147;
-
-        String name3 = "The Mysterious Island"; 
-        String author3 = "Jules Verne";
-        int pageNum3 = 492;
-
-        String name4 = "The Aliens"; 
-        String author4 = "Murray Leinster";
-        int pageNum4 = 58;
-
-        String name5 = "The Gods of Mars"; 
-        String author5 = "Edgar Rice Burroughs";
-        int pageNum5 = 227;
 
         Library lib = new Library();
 
         //adding books
-        lib.addBook(new Book(author1, name1 ,pageNum1));
-        lib.addBook(new Book(author2, name2 ,pageNum2));
-        lib.addBook(new Book(author3, name3 ,pageNum3));
-        lib.addBook(new Book(author4, name4 ,pageNum4));
-        lib.addBook(new Book(author5, name5 ,pageNum5));
+        lib.addBook(new Book("Herbert George Wells","The Time Machine" ,78));
+        lib.addBook(new Book("Herbert George Wells","The War of the Worlds" ,147));
+        lib.addBook(new Book("Jules Verne","The Mysterious Island" ,492));
+        lib.addBook(new Book("Murray Leinster","The Aliens" ,58));
+        lib.addBook(new Book("Edgar Rice Burroughs", "The Gods of Mars", 227));
 
         System.out.println("List of added books: \n");
-        lib.showBooks();
+        for(Book bk: lib.getBooks()) 
+            System.out.println("|" + lib.getBooks().indexOf(bk) + "| " + bk.getName());
         
         System.out.println(">>>>>>>>>>>>>>>>>>>>");
 
         //finding by author Herbert George Wells
-        System.out.println("finding by author:");
-        lib.findAuthor("Herbert George Wells");
+        System.out.println("finding by author: Herbert George Wells");
+        lib.showBooks(lib.findBooksByAuthor("Herbert George Wells"));
 
         System.out.println(">>>>>>>>>>>>>>>>>>>>");
 
         //finding by name 
-        System.out.println("\nfinding by name: ");
-        lib.findName("The War");
+        System.out.println("\nfinding by name: The War");
+        lib.showBooks(lib.findBooksByName("The War"));
 
         System.out.println(">>>>>>>>>>>>>>>>>>>>");
 
         //deliting books
         System.out.println("\nDeliting books: ");
-        lib.showBooks();
+        for(Book bk: lib.getBooks()) 
+            System.out.println("|" + lib.getBooks().indexOf(bk) + "| " + bk.getName());
 
-        lib.deliteBook(0);
-        lib.deliteBook(0);
+        lib.deleteBook(lib.getBooks().get(0));
+        lib.deleteBook(lib.getBooks().get(0));
 
         System.out.println("=========");
 
-        lib.showBooks();
+        for(Book bk: lib.getBooks()) 
+            System.out.println("|" + lib.getBooks().indexOf(bk) + "| " + bk.getName());
+        System.out.println("|test|test|test|");
+        //lib.testMeth(lib.getBooks());
 
     }
 }
