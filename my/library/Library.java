@@ -2,90 +2,67 @@ package my.library;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
-class Library {
-    private ArrayList<Book> books = new ArrayList<>();
+class Library{
+    private ArrayList<LibraryItem> books = new ArrayList<>();
+    private ArrayList<LibraryItem> musics = new ArrayList<>();
 
     void addBook(Book book) {
         books.add(book);
     }
 
-    void deleteBook(Book book) {
+    void addMusic(Music music) {
+        musics.add(music);
+    }
+
+    void deleteBook(LibraryItem book) {
         books.remove(book);
     }
 
-    List<Book> getBooks() {
+    void deleteMusic(LibraryItem music) {
+        musics.remove(music);
+    }
+
+    List<LibraryItem> getBooks() {
         return books;
     }
 
-
-    List<Book> findBooksByAuthor(String authorName) {
-
-        List<Book> autorsBooks = new ArrayList<>();
-        for(Book book: books) {
-            if(authorName.equals(book.getAuthor()))
-                autorsBooks.add(book);
-        }
-        return autorsBooks;
+    List<LibraryItem> getMusic() {
+        return musics;
     }
 
-    List<Book> WithNameContains(String string) {
-        List<Book> autorsBooks = new ArrayList<>();
-        for(Book book: books) {
-            if(book.getName().contains(string))
-                autorsBooks.add(book);
+    //test method findByAuthor
+    <T extends LibraryItem> List<T> findByAuthor(String authorName, List<T> items) {
+        List<T> foundArthors = new ArrayList<>();
+        for(T item: items) {
+            if(authorName.equals(item.getAuthor()))
+                foundArthors.add(item);
         }
-        return autorsBooks;
+        return foundArthors;
     }
 
-    static void showBooks(List<Book> books) {
+    //test method findWithNameContains
+    <T extends LibraryItem> List<T> findWithNameContains(String string, List<T> items) {
+        List<T> foundNames = new ArrayList<>();
+        for(T it: items) {
+            if(it.getName().contains(string))
+                foundNames.add(it);
+        }
+        return foundNames;
+    }
+
+    static <T extends LibraryItem> void show(List<T> items) {
         System.out.println("-----------");
-        for(Book book: books) {
-            System.out.println(book.getDescription());
+        for(T it: items) {
+            System.out.println(it.getDescription());
             System.out.println("-----------");
         }
     }
 
-    public static void main(String[] args) {
-
-        Library library = new Library();
-
-        //adding books
-        library.addBook(new Book("Herbert George Wells","The Time Machine" ,78));
-        library.addBook(new Book("Herbert George Wells","The War of the Worlds" ,147));
-        library.addBook(new Book("Jules Verne","The Mysterious Island" ,492));
-        library.addBook(new Book("Murray Leinster","The Aliens" ,58));
-        library.addBook(new Book("Edgar Rice Burroughs", "The Gods of Mars", 227));
-
-        System.out.println("List of added books: \n");
-        for(Book book: library.getBooks()) 
-            System.out.println("|" + library.getBooks().indexOf(book) + "| " + book.getName());
-        
-        System.out.println(">>>>>>>>>>>>>>>>>>>>");
-
-        //finding by author Herbert George Wells
-        System.out.println("finding by author: Herbert George Wells");
-        Library.showBooks(library.findBooksByAuthor("Herbert George Wells"));
-
-        System.out.println(">>>>>>>>>>>>>>>>>>>>");
-
-        //finding by name 
-        System.out.println("\nfinding by name: The War");
-        Library.showBooks(library.WithNameContains("The War"));
-
-        System.out.println(">>>>>>>>>>>>>>>>>>>>");
-
-        //deleting books
-        System.out.println("\nDeliting books: ");
-        for(Book book: library.getBooks()) 
-            System.out.println("|" + library.getBooks().indexOf(book) + "| " + book.getName());
-
-        library.deleteBook(library.getBooks().get(0));
-        library.deleteBook(library.getBooks().get(0));
-
-        System.out.println("=========");
-
-        for(Book book: library.getBooks()) 
-            System.out.println("|" + library.getBooks().indexOf(book) + "| " + book.getName());
-
+    static <T extends LibraryItem> void showIndex(List<T> items) {
+        for(T it: items) {
+            System.out.println("|" + items.indexOf(it) + "| " + it.getName());
+        }
     }
 }
+
+
