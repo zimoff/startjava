@@ -1,9 +1,10 @@
 package my.library;
-class Music implements LibraryItem {
+
+class MusicAlbum implements LibraryItem {
     private String author;
     private String name;
 
-    Music (String name, String author) {
+    MusicAlbum (String name, String author) {
         this.author = author;
         this.name = name;
     }

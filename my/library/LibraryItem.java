@@ -1,6 +1,6 @@
 package my.library;
-interface LibraryItem {
 
+interface LibraryItem {
     String getAuthor(); 
     String getName();
     String getDescription();

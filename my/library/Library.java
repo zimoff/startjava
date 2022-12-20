@@ -1,39 +1,43 @@
 package my.library;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
 class Library{
-    private ArrayList<LibraryItem> books = new ArrayList<>();
-    private ArrayList<LibraryItem> musics = new ArrayList<>();
+    private ArrayList<LibraryItem> items = new ArrayList<>();
 
-    void addBook(Book book) {
-        books.add(book);
+    void addItem(LibraryItem item) {
+        items.add(item);
     }
 
-    void addMusic(Music music) {
-        musics.add(music);
+    void delete(String type) {
+        if(type.equals("Book")) {
+            for(LibraryItem item: items)
+                if(item instanceof Book) {
+                    items.remove(item);
+                    break;
+                }
+        }
+        if(type.equals("MusicAlbum")) {
+            for(LibraryItem item: items)
+                if(item instanceof MusicAlbum) {
+                    items.remove(item);
+                    break;
+                }
+        }
     }
 
-    void deleteBook(LibraryItem book) {
-        books.remove(book);
+    List<LibraryItem> getItems() {
+        return items;
     }
 
-    void deleteMusic(LibraryItem music) {
-        musics.remove(music);
-    }
-
-    List<LibraryItem> getBooks() {
-        return books;
-    }
-
-    List<LibraryItem> getMusic() {
-        return musics;
-    }
+    //getBooks
+    //getMusicAlbum
 
     //test method findByAuthor
-    <T extends LibraryItem> List<T> findByAuthor(String authorName, List<T> items) {
-        List<T> foundArthors = new ArrayList<>();
-        for(T item: items) {
+    List<LibraryItem> findByAuthor(String authorName) {
+        List<LibraryItem> foundArthors = new ArrayList<>();
+        for(LibraryItem item: items) {
             if(authorName.equals(item.getAuthor()))
                 foundArthors.add(item);
         }
@@ -41,28 +45,34 @@ class Library{
     }
 
     //test method findWithNameContains
-    <T extends LibraryItem> List<T> findWithNameContains(String string, List<T> items) {
-        List<T> foundNames = new ArrayList<>();
-        for(T it: items) {
+    List<LibraryItem> findWithNameContains(String string) {
+        List<LibraryItem> foundNames = new ArrayList<>();
+        for(LibraryItem it: items) {
             if(it.getName().contains(string))
                 foundNames.add(it);
         }
         return foundNames;
     }
 
-    static <T extends LibraryItem> void show(List<T> items) {
+    //test for items
+    void showIndex(List<LibraryItem> items) {
+        for(LibraryItem it: items) {
+            if(it instanceof Book)
+                System.out.println("Book|" + items.indexOf(it) + "| " + it.getName() + "| " + it.getClass());
+
+            if(it instanceof MusicAlbum)
+                System.out.println("Music|" + items.indexOf(it) + "| " + it.getName() + "| " + it.getClass());
+        }
+    }
+
+    static void show(List<LibraryItem> items) {
         System.out.println("-----------");
-        for(T it: items) {
+        for(LibraryItem it: items) {
             System.out.println(it.getDescription());
             System.out.println("-----------");
         }
     }
 
-    static <T extends LibraryItem> void showIndex(List<T> items) {
-        for(T it: items) {
-            System.out.println("|" + items.indexOf(it) + "| " + it.getName());
-        }
-    }
 }
 
 

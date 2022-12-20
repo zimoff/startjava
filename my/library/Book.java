@@ -1,4 +1,5 @@
 package my.library;
+
 class Book implements LibraryItem  {
     private String author;
     private String name;
@@ -18,7 +19,7 @@ class Book implements LibraryItem  {
         return name;
     }
 
-    int getPageNum() { 
+    public int getPageNum() { 
         return pageNum;
     }
 

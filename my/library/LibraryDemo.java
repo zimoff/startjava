@@ -1,4 +1,5 @@
 package my.library;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,71 +9,81 @@ class LibraryDemo {
         Library library = new Library();
 
         //adding books
-        library.addBook(new Book("Herbert George Wells","The Time Machine" ,78));
-        library.addBook(new Book("Herbert George Wells","The War of the Worlds" ,147));
-        library.addBook(new Book("Jules Verne","The Mysterious Island" ,492));
-        library.addBook(new Book("Murray Leinster","The Aliens" ,58));
-        library.addBook(new Book("Edgar Rice Burroughs", "The Gods of Mars", 227));
+        library.addItem(new Book("Herbert George Wells","The Time Machine" ,78));
+        library.addItem(new Book("Herbert George Wells","The War of the Worlds" ,147));
+        library.addItem(new Book("Jules Verne","The Mysterious Island" ,492));
+        library.addItem(new Book("Murray Leinster","The Aliens" ,58));
+        library.addItem(new Book("Edgar Rice Burroughs", "The Gods of Mars", 227));
 
         System.out.println("List of added books: ");
-        Library.showIndex(library.getBooks());
+        library.showIndex(library.getItems());
 
         System.out.println(">>>>>>>>>>>>>>>>>>>>");
 
         //finding by author Herbert George Wells
         System.out.println("finding by author: Herbert George Wells");
-        Library.show(library.findByAuthor("Herbert George Wells", library.getBooks()));
+        Library.show(library.findByAuthor("Herbert George Wells"));
 
         System.out.println(">>>>>>>>>>>>>>>>>>>>");
 
         //finding by name 
         System.out.println("finding by name: The War");
-        Library.show(library.findWithNameContains("The War", library.getBooks()));
+        Library.show(library.findWithNameContains("The War"));
 
         System.out.println(">>>>>>>>>>>>>>>>>>>>");
 
         //deleting books
         System.out.println("Deliting books: ");
-        Library.showIndex(library.getBooks());
+        library.showIndex(library.getItems());
 
-        library.deleteBook(library.getBooks().get(0));
-        library.deleteBook(library.getBooks().get(0));
+        library.delete("Book");
+        library.delete("Book");
 
         System.out.println("=========");
 
-        Library.showIndex(library.getBooks());
+        library.showIndex(library.getItems());
 
         System.out.println(">>>>>>>>>>>>>>>>>>>>");
 
         //adding music
-        library.addMusic(new Music("Nova Twins","Supernova"));
-        library.addMusic(new Music("Watain","Rouge Carpet Disaster"));
-        library.addMusic(new Music("hz_chto_za_nazvanie","The Agony & Ecstasy Of Watain"));
-        library.addMusic(new Music("Wilderun","Supernova"));
-        library.addMusic(new Music("Dark Funeral","We Are The Apocalypse"));
+        library.addItem(new MusicAlbum("Nova Twins","Supernova"));
+        library.addItem(new MusicAlbum("Watain","Rouge Carpet Disaster"));
+        library.addItem(new MusicAlbum("hz_chto_za_nazvanie","The Agony & Ecstasy Of Watain"));
+        library.addItem(new MusicAlbum("Wilderun","Supernova"));
+        library.addItem(new MusicAlbum("Dark Funeral","We Are The Apocalypse"));
 
         System.out.println("List of added music");
-        Library.showIndex(library.getMusic());
+        library.showIndex(library.getItems());
 
         System.out.println(">>>>>>>>>>>>>>>>>>>>");
 
-        System.out.println("finding by author: Herbert George Wells");
-        Library.show(library.findByAuthor("Supernova", library.getMusic()));
+        System.out.println("finding by author: Supernova");
+        Library.show(library.findByAuthor("Supernova"));
         System.out.println(">>>>>>>>>>>>>>>>>>>>");
         
         System.out.println("finding by name: Dark");
-        Library.show(library.findWithNameContains("Dark", library.getMusic()));
+        Library.show(library.findWithNameContains("Dark"));
         System.out.println(">>>>>>>>>>>>>>>>>>>>");
 
         //deleting books
         System.out.println("Deliting music: ");
-        Library.showIndex(library.getMusic());
+        library.showIndex(library.getItems());
 
-        library.deleteMusic(library.getMusic().get(0));
-        library.deleteMusic(library.getMusic().get(0));
+        library.delete("MusicAlbum");
+        library.delete("MusicAlbum");
 
         System.out.println("=========");
 
-        Library.showIndex(library.getBooks());
+        library.showIndex(library.getItems());
+        
+        //testing
+        //System.out.println(">>>>>>>>>>>>>>>>>>>>");
+        //System.out.println(":TEST TEST TEST ");
+        //library.showIndex(library.getItems());
+        //System.out.println(">>>>>>>>>>>>>>>>>>>>");
+        //System.out.println(library.getItems().get(0).toString());
+
+
+
     }
 }
