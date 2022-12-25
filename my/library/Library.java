@@ -3,28 +3,15 @@ package my.library;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
-class Library{
-    private ArrayList<LibraryItem> items = new ArrayList<>();
+class Library {
+    private List<LibraryItem> items = new ArrayList<>();
 
     void addItem(LibraryItem item) {
         items.add(item);
     }
 
-    void delete(String type) {
-        if(type.equals("Book")) {
-            for(LibraryItem item: items)
-                if(item instanceof Book) {
-                    items.remove(item);
-                    break;
-                }
-        }
-        if(type.equals("MusicAlbum")) {
-            for(LibraryItem item: items)
-                if(item instanceof MusicAlbum) {
-                    items.remove(item);
-                    break;
-                }
-        }
+    void delete(LibraryItem item) {
+        items.remove(item);
     }
 
     List<LibraryItem> getItems() {
@@ -32,7 +19,21 @@ class Library{
     }
 
     //getBooks
+    List<LibraryItem> getBooks() {
+        List<LibraryItem> books = new ArrayList<>();
+        for(LibraryItem item: items)
+            if(item instanceof Book)
+                books.add(item);
+        return books;
+    }
     //getMusicAlbum
+    List<LibraryItem> getMusicAlbum() {
+        List<LibraryItem> musicAlbum = new ArrayList<>();
+        for(LibraryItem item: items)
+            if(item instanceof MusicAlbum)
+                musicAlbum.add(item);
+        return musicAlbum;
+    }
 
     //test method findByAuthor
     List<LibraryItem> findByAuthor(String authorName) {

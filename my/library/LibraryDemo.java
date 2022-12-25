@@ -36,8 +36,8 @@ class LibraryDemo {
         System.out.println("Deliting books: ");
         library.showIndex(library.getItems());
 
-        library.delete("Book");
-        library.delete("Book");
+        library.delete(library.getItems().get(0));
+        library.delete(library.getItems().get(0));
 
         System.out.println("=========");
 
@@ -69,12 +69,17 @@ class LibraryDemo {
         System.out.println("Deliting music: ");
         library.showIndex(library.getItems());
 
-        library.delete("MusicAlbum");
-        library.delete("MusicAlbum");
+        library.delete(library.getItems().get(3));
+        library.delete(library.getItems().get(3));
 
         System.out.println("=========");
 
+        System.out.println("SHOW ITEMS: ");
         library.showIndex(library.getItems());
+        System.out.println("SHOW BOOKS: ");
+        library.showIndex(library.getBooks());
+        System.out.println("SHOW MUSIC: ");
+        library.showIndex(library.getMusicAlbum());
         
         //testing
         //System.out.println(">>>>>>>>>>>>>>>>>>>>");

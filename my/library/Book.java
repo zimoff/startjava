@@ -1,6 +1,6 @@
 package my.library;
 
-class Book implements LibraryItem  {
+class Book implements LibraryItem {
     private String author;
     private String name;
     private int pageNum;
